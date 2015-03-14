@@ -1,0 +1,91 @@
+#
+# Default settings for the simulation
+#
+
+## Scenario settings
+Scenario.name = default_scenario
+Scenario.simulateConnections = true
+Scenario.updateInterval = 1
+# 43k ~= 12h
+
+Scenario.endTime = 20k
+
+Scenario.nrofHostGroups = 4
+
+
+## Group and movement model specific settings
+# pois: Points Of Interest indexes and probabilities (poiIndex1, poiProb1, poiIndex2, poiProb2, ... ) - for ShortestPathMapBasedMovement
+# okMaps : which map nodes are OK for the group (map file indexes), default=all - for all MapBasedMovent models
+# routeFile: route's file path - for MapRouteMovement
+# routeType: route's type - for MapRouteMovement
+
+MovementModel.rngSeed = 109
+
+Group.transmitRange = 10
+Group.transmitSpeed = 250
+Group.waitTime = 5, 10
+Group.router = SprayAndWaitRouter
+
+Group1.groupID = maincenter
+Group1.nrofHosts = 1
+Group1.movementModel = pdm.CenterMovement
+Group1.centerType = mainreliefcenter
+Group1.okMaps = 1
+Group1.speed = 0.0, 0.0
+
+Group2.groupID = neighborhood
+Group2.nrofHosts = 1
+Group2.movementModel = pdm.CenterMovement
+Group2.centerType = neighborhood
+Group2.okMaps = 1
+Group2.speed = 0.0, 0.0
+Group2.waitTime = 0.0, 0.0
+
+Group3.groupID = v0_
+Group3.nrofHosts = 1
+Group3.movementModel = pdm.VolunteerMovement
+Group3.neighborhood = 0
+Group3.radius = 500
+Group3.okMaps = 1
+Group3.speed = 1.111, 1.389
+Group3.waitTime = 5, 10
+
+Group4.groupID = mulle
+Group4.nrofHosts = 1
+Group4.movementModel = pdm.InCenterVehicleMovement
+Group4.homeCenterType = mainreliefcenter
+Group4.targetCenters = neighborhood
+Group4.okMaps=1
+Group4.speed = 20, 50
+Group4.waitTime = 10, 20
+
+
+## Message creation parameters 
+# How many event generators
+Events.nrof = 0
+# Class of the first event generator
+#Events1.class = MessageEventGenerator
+
+
+# (following settings are specific for the MessageEventGenerator class)
+# Creation interval in seconds (one new message every 25 to 35 seconds)
+#Events1.interval = 25, 26
+# Message sizes (500kB - 1MB)
+#Events1.size = 500k, 1M
+# range of message source/destination addresses
+#Events1.hosts = 0, 2
+# Message ID prefix
+#Events1.prefix = M
+
+
+## Reports - all report names have to be valid report classes
+
+# how many reports to load
+Report.nrofReports = 1
+# length of the warm up period (simulated seconds)
+Report.warmup = 0
+# default directory of reports (can be overridden per Report with output setting)
+Report.reportDir = reports/
+# Report classes to loado
+Report.report1 = ConnectivityDtnsim2Report
+
